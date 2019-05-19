@@ -2,7 +2,7 @@
 ## Status
 [![CircleCI](https://circleci.com/gh/StigAkl/effective-octo-pancake.svg?style=svg)](https://circleci.com/gh/StigAkl/effective-octo-pancake)
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=rpg-adventures-v1)]
+![Heroku](https://heroku-badge.herokuapp.com/?app=rpg-adventures-v1)
 ## Available Scripts
 
 In the project directory, you can run:
