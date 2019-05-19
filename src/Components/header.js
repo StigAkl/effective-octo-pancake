@@ -12,7 +12,7 @@ const Header = (param) => {
     };
     return (
         <div id="header" style={headerStyle}>
-            {param.username}
+            {param.username} - {param.money + ' kr'} - Lvl: {param.level}
         </div>
     );
 }
