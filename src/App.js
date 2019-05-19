@@ -1,4 +1,4 @@
-import React, { Component } from 'reeact';
+import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LandingPage from './Components/landingpage';
 import AppLayout from './Components/applayout';  
