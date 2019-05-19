@@ -1,4 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Status
 [![CircleCI](https://circleci.com/gh/StigAkl/effective-octo-pancake.svg?style=svg)](https://circleci.com/gh/StigAkl/effective-octo-pancake)
