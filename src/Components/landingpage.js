@@ -2,8 +2,6 @@ import React from 'react';
 import Auth from './auth'; 
 
 const LandingPage = (props) => {
-
-    console.log(props); 
     return (
         <div>
             <h1>This is the landing page</h1>
