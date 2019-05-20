@@ -4,15 +4,7 @@ import Login from "./Components/Login";
 import axios from "axios"; 
 
 class App extends Component {
- 
-  componentDidMount() {
-    axios.post("http://localhost:3001/api/redirect", {
-      username: "Kake", 
-      password: "kake2"
-    }).then((result) => {
-      console.log(result); 
-    })
-  }
+
   render() {
   return (
     <div className="App">
