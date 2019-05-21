@@ -1,13 +1,16 @@
 import React, {Component} from "react"; 
 import "../css/Login.css"; 
-
+import axios from "axios"; 
+import { URLS } from "../utils/urls"; 
 class Login extends Component {
     constructor(props) {
         super(props); 
         this.props = props; 
         this.state = {
             email: "", 
-            password: ""
+            password: "",
+            error: "",
+            success: ""
         };
     }
 
@@ -20,10 +23,29 @@ class Login extends Component {
     handleSubmit = event => {
         event.preventDefault(); 
         
-        localStorage.setItem("email", this.state.email); 
+        if(this.state.error) this.setState({error: "", success: ""})
+        
+        axios.post(URLS.baseURL.concat(URLS.loginPlayer), {
+           email: this.state.email,
+           password: this.state.password
+        }).then((result) => {
+
+            const data = result.data; 
+            const player = data.player; 
+            const token = data.token; 
+
+            this.setState({
+                success: "Sucess!"
+            })
+        }).catch((error) => {
+            this.setState({
+                error: error.response.data.error
+            });
+        }); 
     }
 
     render() {
+
         return (
 
             <div className="Login">
@@ -38,6 +60,19 @@ class Login extends Component {
                         <input type="password" onChange={this.handleChange} className="form-control" id="password" placeholder="Password.." />
                     </div>
                     <button type="submit" className="btn btn-primary">Login</button>
+
+                <div className="info-box">
+                    {this.state.error && 
+                    <div className="alert alert-danger" role="alert">
+                        {this.state.error}
+                    </div>}
+
+                    {this.state.success && 
+                    <div className="alert alert-success" role="alert">
+                        {this.state.success}
+                    </div>
+                    }
+                </div>
                 </form>
             </div>
         )
