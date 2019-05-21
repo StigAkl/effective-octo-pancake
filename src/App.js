@@ -40,6 +40,7 @@ class App extends Component {
         this.setState({
           isAuthenticated: false,
           errorMessage: "You got logged out..",
+          loading: false
         });
 
         logOut(); 
@@ -60,7 +61,8 @@ class App extends Component {
     <div className="App">
       {
       this.state.loading ?  <p>Loading..</p> :
-      this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>
+      this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : 
+      <Login error={this.state.errorMessage} loginHandler={this.loginHandler} /> }
       }
     </div>
   );

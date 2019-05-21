@@ -15,6 +15,14 @@ class Login extends Component {
         };
     }
 
+    componentDidMount() {
+        if(this.props.error) {
+            this.setState({
+                error: this.props.error
+            });
+        }
+    }
+
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
