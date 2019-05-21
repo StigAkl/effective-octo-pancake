@@ -17,8 +17,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state); 
-    
+    console.log(URLS); 
+
     const authenticated = isAuthenticated(); 
 
     if(authenticated) {
@@ -63,9 +63,7 @@ class App extends Component {
 
   return (
     <div className="App">
-      {this.state.loading ? <p>Loading..</p> :
-
-      this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>}
+      <Login loginHandler={this.loginHandler}/>
     </div>
   );
 

@@ -26,7 +26,7 @@ class Login extends Component {
         
         if(this.state.error) this.setState({error: "", success: ""})
         
-        axios.post(URLS.baseURL.concat(URLS.loginPlayer), {
+        axios.post("https://rpg-api.herokuapp.com/api/players/auth", {
            email: this.state.email,
            password: this.state.password
         }).then((result) => {
