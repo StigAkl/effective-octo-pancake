@@ -1,4 +1,5 @@
 import {jsonwebtoken as jwt} from "jsonwebtoken"; 
+
 const tokenSecret = process.env.TOKEN_SECRET || "playerSecret"; 
 
 export const isValid = token => {
