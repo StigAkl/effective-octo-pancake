@@ -64,7 +64,7 @@ class App extends Component {
   return (
     <div className="App">
       {this.state.loading && <p>Loading..</p>}
-      {this.state.auth ? <p>You are logged in as {this.state.username}</p> : <Login loginHandler={this.loginHandler}/>}
+      {this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>}
     </div>
   );
 
