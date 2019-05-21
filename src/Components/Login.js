@@ -46,19 +46,21 @@ class Login extends Component {
 
             logIn(token); 
 
-            console.log(this.props); 
             this.props.loginHandler(player); 
 
         }).catch((error) => {
 
-            let message = error;
+            let message = ""; 
 
             if(error.response) {
                 message = error.response.data.error; 
+            } else {
+                message = "Failed to contact API services. Please try again later"
             }
+
             this.setState({
                 error: message
-            });
+            })
         }); 
     }
 
