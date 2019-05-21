@@ -59,11 +59,12 @@ class App extends Component {
     });
   }
 
-  render() {
 
+  render() {
   return (
     <div className="App">
-      <Login loginHandler={this.loginHandler}/>
+      {this.state.loading && <p>Loading..</p>}
+      {this.state.auth ? <p>You are logged in as {this.state.username}</p> : <Login loginHandler={this.loginHandler}/>}
     </div>
   );
 
