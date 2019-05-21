@@ -17,10 +17,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("Env variables"); 
-
-    console.log(process.env.REACT_APP_API_HOST);
-    console.log(process.env.REACT_APP_LOCAL_TOKEN);  
+    console.log(this.state); 
+    
     const authenticated = isAuthenticated(); 
 
     if(authenticated) {
@@ -66,6 +64,7 @@ class App extends Component {
   return (
     <div className="App">
       {this.state.loading ? <p>Loading..</p> :
+
       this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>}
     </div>
   );

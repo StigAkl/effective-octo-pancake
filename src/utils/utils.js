@@ -1,6 +1,6 @@
-import {jsonwebtoken as jwt} from "jsonwebtoken"; 
+const jwt = require("jsonwebtoken"); 
 
-const tokenSecret = process.env.TOKEN_SECRET || "playerSecret"; 
+const tokenSecret = process.env.REACT_APP_TOKEN_SECRET || "playerSecret"; 
 
 export const isValid = token => {
 

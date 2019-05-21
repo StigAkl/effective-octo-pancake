@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import "../css/Login.css"; 
 import axios from "axios"; 
 import { URLS } from "../utils/urls"; 
+import { logIn } from "../services/authService"; 
 class Login extends Component {
     constructor(props) {
         super(props); 
@@ -32,14 +33,22 @@ class Login extends Component {
 
             const data = result.data; 
             const player = data.player; 
-            const token = data.token; 
+            const token = data.token;
 
-            this.setState({
-                success: "Sucess!"
-            })
+            logIn(token); 
+
+            console.log(this.props); 
+            this.props.loginHandler(player); 
+
         }).catch((error) => {
+
+            let message = error;
+
+            if(error.response) {
+                message = error.response.data.error; 
+            }
             this.setState({
-                error: error.response.data.error
+                error: message
             });
         }); 
     }
