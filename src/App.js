@@ -20,7 +20,6 @@ class App extends Component {
     console.log(URLS); 
 
     const authenticated = isAuthenticated(); 
-
     if(authenticated) {
       axios.get(URLS.baseURL.concat(URLS.playerInformation), {
         params: {
@@ -32,11 +31,11 @@ class App extends Component {
       }).then((result) => {
         
         this.setState({
+          isAuthenticated: true, 
           player: result.data,
-          isAuthenticated: true,
-        });
+          loading: false
+        })
       })
-      
       .catch((error) => {
         this.setState({
           isAuthenticated: false,
@@ -45,12 +44,8 @@ class App extends Component {
 
         logOut(); 
       });
+      }
     }
-
-    this.setState({
-      loading: false
-    })
-  }
 
   loginHandler = (data) => {
     this.setState({
@@ -63,8 +58,10 @@ class App extends Component {
   render() {
   return (
     <div className="App">
-      {this.state.loading && <p>Loading..</p>}
-      {this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>}
+      {
+      this.state.loading ?  <p>Loading..</p> :
+      this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : <Login loginHandler={this.loginHandler}/>
+      }
     </div>
   );
 
