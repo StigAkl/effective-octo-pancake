@@ -19,8 +19,8 @@ class App extends Component {
   componentDidMount() {
     console.log("Env variables"); 
 
-    console.log(process.env.API_HOST);
-    console.log(process.env.LOCAL_TOKEN);  
+    console.log(process.env.REACT_APP_API_HOST);
+    console.log(process.env.REACT_APP_LOCAL_TOKEN);  
     const authenticated = isAuthenticated(); 
 
     if(authenticated) {
