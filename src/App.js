@@ -17,7 +17,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(URLS.baseURL); 
+    console.log("Env variables"); 
+
+    console.log(process.env.API_HOST);
+    console.log(process.env.LOCAL_TOKEN);  
     const authenticated = isAuthenticated(); 
 
     if(authenticated) {
