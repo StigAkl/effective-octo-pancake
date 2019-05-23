@@ -4,10 +4,7 @@ const localStorageKey = process.env.REACT_APP_LOCAL_TOKEN || "localToken";
 
 export const isAuthenticated = () => {
     const token = getToken();  
-
-    console.log("TOKEN:", token); 
-
-    console.log(isValid(token)); 
+    
     if(!token || !isValid(token)) return false; 
 
     return true; 

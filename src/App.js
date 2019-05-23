@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Login from "./Components/Login"; 
-import axios from "axios"; 
-import { isAuthenticated, getToken, getId, logOut } from "./services/authService"; 
-import { URLS } from "./utils/urls"; 
+import { fetchPlayerInformation } from "./api/apiFetchers"; 
+import { isAuthenticated, getId} from "./services/authService"; 
+import Game from "./Components/Game/Game"; 
 
 class App extends Component {
   constructor(props) {
@@ -10,44 +10,39 @@ class App extends Component {
     this.state = {
       player: {},
       isAuthenticated: false,
-      loading: true
+      loading: true,
+      errorMessage: ""
     }
-
     this.loginHandler = this.loginHandler.bind(this); 
   }
 
   componentDidMount() {
-    console.log(URLS); 
-
     const authenticated = isAuthenticated(); 
     if(authenticated) {
-      axios.get(URLS.baseURL.concat(URLS.playerInformation), {
-        params: {
-          id: getId()
-        },
-        headers: {
-          Authorization: "Bearer ".concat(getToken())
+      fetchPlayerInformation((success, result) => {
+        if(success) {
+          this.setState({
+            isAuthenticated: success,
+            player: result.data,
+            loading: false,
+            errorMessage: ""
+          }); 
+        } else {
+          this.setState({
+            isAuthenticated: false, 
+            errorMessage: "Coult not fetch player data. Please try again later", 
+            loading: false
+          });
         }
-      }).then((result) => {
-        
+      }); 
+      } 
+      
+      //Not authenticated
+      else {
+        let errorMessage = getId() === undefined ? "" : "It looks like your session has expired! Please log in again"; 
         this.setState({
-          isAuthenticated: true, 
-          player: result.data,
-          loading: false
-        })
-      })
-      .catch((error) => {
-        this.setState({
-          isAuthenticated: false,
-          errorMessage: "You got logged out..",
-          loading: false
-        });
-
-        logOut(); 
-      });
-      } else {
-        this.setState({
-          loading: false
+          loading: false,
+          errorMessage
         });
       }
     }
@@ -66,9 +61,8 @@ class App extends Component {
       {
       
         this.state.loading ?  <p>Loading..</p> :
-        this.state.isAuthenticated ? <p>You are logged in as {this.state.player.username}</p> : 
+        this.state.isAuthenticated ? <Game player={this.state.player}/> : 
         <Login error={this.state.errorMessage} loginHandler={this.loginHandler} /> 
-      
       }
     </div>
   );

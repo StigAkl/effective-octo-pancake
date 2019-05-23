@@ -17,6 +17,10 @@ class Login extends Component {
     }
 
     componentDidMount() {
+
+        console.log("prop"); 
+        console.log(this.props); 
+        
         if(this.props.error) {
             this.setState({
                 error: this.props.error
