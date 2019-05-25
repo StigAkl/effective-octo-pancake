@@ -17,7 +17,10 @@ export const getToken = () => {
 export const getId = () => {
     const token = getToken(); 
 
-    if(!token || !isValid(token)) return undefined; 
+    if(!token || !isValid(token)) {
+        logOut(); 
+        return undefined;
+    } 
 
     return getIdFromToken(token); 
 }
