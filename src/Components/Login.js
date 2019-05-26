@@ -12,15 +12,12 @@ class Login extends Component {
             email: "", 
             password: "",
             error: "",
-            success: ""
+            success: "",
+            loading: false
         };
     }
 
     componentDidMount() {
-
-        console.log("prop"); 
-        console.log(this.props); 
-        
         if(this.props.error) {
             this.setState({
                 error: this.props.error
@@ -39,6 +36,10 @@ class Login extends Component {
         
         if(this.state.error) this.setState({error: "", success: ""})
         
+        this.setState({
+            loading: true
+        });
+
         axios.post(URLS.baseURL.concat(URLS.loginPlayer), {
            email: this.state.email,
            password: this.state.password
@@ -53,7 +54,9 @@ class Login extends Component {
             this.props.loginHandler(player); 
 
         }).catch((error) => {
-
+            this.setState({
+                loading: false
+            })
             let message = ""; 
 
             if(error.response) {
@@ -83,7 +86,14 @@ class Login extends Component {
                         <label>Password</label>
                         <input type="password" onChange={this.handleChange} className="form-control" id="password" placeholder="Password.." />
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    
+                    {this.state.loading ? 
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Logging in...
+                        </button>
+                    :
+                    <button type="submit" className="btn btn-primary">Login</button>}
 
                 <div className="info-box">
                     {this.state.error && 
